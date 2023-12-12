@@ -1,0 +1,25 @@
+{
+    "roles": [
+      {
+        "name": "admin",
+        "permissions": [
+          "*"
+        ]
+      },
+      {
+        "name": "manager",
+        "permissions": [
+          "create_task",
+          "read_task",
+          "update_task"
+        ]
+      },
+      {
+        "name": "employee",
+        "permissions": [
+          "create_task",
+          "read_task"
+        ]
+      }
+    ]
+  }
