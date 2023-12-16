@@ -84,10 +84,10 @@ const ConsultTeachers = async (
       programs[0],
       {},
       {},
-      [{ path: 'teachers' }]
+      [{ path: 'cohorts' }]
     )
 
-    return res.send(findTeacher?.teachers)
+    return res.send(findTeacher)
   } catch (error) {
     return errorSender('/consult/teachers', error, res, req)
   }

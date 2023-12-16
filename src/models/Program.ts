@@ -1,6 +1,5 @@
 import { Schema, type Document, model } from 'mongoose'
 import { type ICohort } from './Cohort'
-import { type ITeacher } from './Teacher'
 
 export interface IProgram {
   name: string
@@ -13,7 +12,6 @@ export interface IProgram {
   numberResolutionOfQualifiedRegistration: string
   resolutionFile: string
   cohorts?: ICohort[]
-  teachers?: ITeacher[]
 }
 
 export type ProgramDocument = Document & IProgram
@@ -28,8 +26,7 @@ const ProgramSchema = new Schema<ProgramDocument>({
   dateRegistration: { type: String, required: true },
   numberResolutionOfQualifiedRegistration: { type: String, required: true },
   resolutionFile: { type: String, required: true },
-  cohorts: [{ type: Schema.ObjectId, ref: 'Cohorts' }],
-  teachers: [{ type: Schema.ObjectId, ref: 'Teachers' }]
+  cohorts: [{ type: Schema.ObjectId, ref: 'Cohorts' }]
 })
 
 export default model<ProgramDocument>('Programs', ProgramSchema)

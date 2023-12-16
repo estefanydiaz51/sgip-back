@@ -32,8 +32,17 @@ const CreateStudents = async (
       civilStatus,
       ingressDate,
       egressDate,
-      email
+      email,
+      cohortId
     } = req.body
+    const findCohort = await CohortService.findByIdCohort(cohortId)
+    if (!findCohort) {
+      return res.status(httpStatus.FORBIDDEN).json({
+        success: false,
+        message: 'corte no encontrada'
+      })
+    }
+    console.log(findCohort)
 
     const newStudent = new Student({
       name,
@@ -48,7 +57,8 @@ const CreateStudents = async (
       civilStatus,
       ingressDate,
       egressDate,
-      email
+      email,
+      cohort: findCohort
     })
 
     await newStudent.save()

@@ -14,7 +14,8 @@ class CreateValidator {
     civilStatus: Joi.string().trim().required(),
     ingressDate: Joi.string().trim().required(),
     egressDate: Joi.string().trim().required(),
-    email: Joi.string().trim().email().required()
+    email: Joi.string().trim().email().required(),
+    cohortId: Joi.string().hex().length(24).required()
   })
 
   static program: Joi.ObjectSchema<any> = Joi.object().keys({

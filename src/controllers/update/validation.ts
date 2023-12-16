@@ -45,15 +45,15 @@ class UpdateValidator {
       code: Joi.string().trim(),
       startDate: Joi.string().trim(),
       EndDate: Joi.string().trim(),
-      numberStudents: Joi.string().trim()
+      numberStudents: Joi.string().trim(),
+      teachers: Joi.array().items(Joi.string().hex().length(24)).required()
     })
-    .or('name', 'code', 'startDate', 'EndDate', 'numberStudents')
+    .or('name', 'code', 'startDate', 'EndDate', 'numberStudents', 'teachers')
 
   static program: Joi.ObjectSchema<any> = Joi.object()
     .keys({
       programId: Joi.string().hex().length(24).required(),
-      cohortId: Joi.string().hex().length(24),
-      teacherId: Joi.string().hex().length(24),
+      cohortId: Joi.array().items(Joi.string().hex().length(24)).required(),
       name: Joi.string().trim(),
       id: Joi.string().trim(),
       description: Joi.string().trim(),
@@ -74,8 +74,7 @@ class UpdateValidator {
       'dateRegistration',
       'numberResolutionOfQualifiedRegistration',
       'resolutionFile',
-      'cohortId',
-      'teacherId'
+      'cohortId'
     )
 
   static teacher: Joi.ObjectSchema<any> = Joi.object()

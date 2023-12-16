@@ -15,10 +15,9 @@ export interface IStudent {
   civilStatus: string
   ingressDate: string
   egressDate: string
-  cohort: string
   email: string
   programs?: IProgram[]
-  cohorts?: ICohort[]
+  cohort: ICohort
 }
 
 export type StudentDocument = Document & IStudent
@@ -38,7 +37,7 @@ const StudentSchema = new Schema<StudentDocument>({
   egressDate: { type: String, required: true },
   email: { type: String, required: true },
   programs: [{ type: Schema.ObjectId, ref: 'Programs' }],
-  cohorts: [{ type: Schema.ObjectId, ref: 'Cohorts' }]
+  cohort: { type: Schema.ObjectId, ref: 'Cohorts' }
 })
 
 export default model<StudentDocument>('Students', StudentSchema)

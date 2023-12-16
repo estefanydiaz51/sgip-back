@@ -74,8 +74,15 @@ const UpdateCohort = async (req: Request, res: Response): Promise<Response> => {
       schema: UpdateValidator.cohort
     })
 
-    const { name, code, startDate, EndDate, numberStudents, cohortId } =
-      req.body
+    const {
+      name,
+      code,
+      startDate,
+      EndDate,
+      numberStudents,
+      cohortId,
+      teachers
+    } = req.body
 
     const updateCohort = await CohortService.findByIdAndUpdateCohort(
       cohortId,
@@ -84,7 +91,10 @@ const UpdateCohort = async (req: Request, res: Response): Promise<Response> => {
         code,
         startDate,
         EndDate,
-        numberStudents
+        numberStudents,
+        $addToSet: {
+          teachers
+        }
       },
       { new: true }
     )
@@ -116,7 +126,6 @@ const UpdateProgram = async (
       numberResolutionOfQualifiedRegistration,
       resolutionFile,
       programId,
-      teacherId,
       cohortId
     } = req.body
     const UpdateProgram = await ProgramService.findByIdAndUpdateProgram(
@@ -132,7 +141,6 @@ const UpdateProgram = async (
         numberResolutionOfQualifiedRegistration,
         resolutionFile,
         $addToSet: {
-          teachers: teacherId,
           cohorts: cohortId
         }
       },
